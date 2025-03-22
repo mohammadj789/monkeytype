@@ -61,7 +61,7 @@ const Result = ({
     }, [stats, words]) || [];
   const lastItem = results[results.length - 1];
   return (
-    <div className=" grid md:grid-cols-[auto_1fr] gap-4 container p-4">
+    <div className="grid md:grid-cols-[auto_1fr] gap-4 container p-4">
       <div className="grid w-fit">
         <div>
           <div className="text-[2rem] leading-6 text-sub-color w-fit">
@@ -82,7 +82,45 @@ const Result = ({
       </div>
 
       <TypeAreaChart results={results} />
-      <button className="mx-auto" onClick={rest}>
+      <div className="grid col-span-full grid-cols-3 md:grid-cols-6">
+        <div>
+          <div className="text-base text-sub-color">wpm</div>
+          <div className="text-base  text-main-color ">
+            {lastItem.totalWpm}
+          </div>
+        </div>
+        <div>
+          <div className="text-base text-sub-color">wpm</div>
+          <div className="text-base  text-main-color ">
+            {lastItem.totalWpm}
+          </div>
+        </div>
+        <div>
+          <div className="text-base text-sub-color">wpm</div>
+          <div className="text-base  text-main-color ">
+            {lastItem.totalWpm}
+          </div>
+        </div>
+        <div>
+          <div className="text-base text-sub-color">wpm</div>
+          <div className="text-base  text-main-color ">
+            {lastItem.totalWpm}
+          </div>
+        </div>
+        <div>
+          <div className="text-base text-sub-color">wpm</div>
+          <div className="text-base  text-main-color ">
+            {lastItem.totalWpm}
+          </div>
+        </div>
+        <div>
+          <div className="text-base text-sub-color">wpm</div>
+          <div className="text-base  text-main-color ">
+            {lastItem.totalWpm}
+          </div>
+        </div>
+      </div>
+      <button className="mx-auto col-span-full" onClick={rest}>
         Reset
       </button>
     </div>
