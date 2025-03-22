@@ -68,7 +68,7 @@ const TypeArea = ({ data }: { data: Words }) => {
     finishedTyping();
   };
   return (
-    <div className="w-full">
+    <div className="container">
       <span className="text-main-color text-2xl">{timer}</span>
       {stats.length === TIME ? (
         <Result rest={ResetStats} stats={stats} words={data.words} />

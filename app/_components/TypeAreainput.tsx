@@ -75,7 +75,7 @@ const TypeAreainput = ({
 
       <div
         ref={containerRef}
-        className={`container select-none flex flex-wrap text-[2rem] transition-all ${
+        className={`select-none flex flex-wrap text-[2rem] transition-all ${
           isfocused ? "" : "blur-xs opacity-25"
         }`}
         onClick={inside}
