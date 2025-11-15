@@ -3,17 +3,15 @@
 import { Words } from "@/models/englishwords.model";
 import React, { useEffect, useState } from "react";
 
-const TIME = 15;
-
 import { StatsModel } from "@/models/stats.model";
 import TypeAreainput from "./TypeAreainput";
 import Result from "./Result/Result";
-
+const times = [5, 10, 15, 30, 60];
 const TypeArea = ({ data }: { data: Words }) => {
   const [text, setText] = useState("");
   const [timer, setTimer] = useState<false | number>(false);
   const [stats, setStats] = useState<StatsModel[]>([]);
-
+  const [timeBase, setTimeBase] = useState<number>(15);
   const finishedTyping = () => {
     setTimer(false);
     setText("");
@@ -60,18 +58,44 @@ const TypeArea = ({ data }: { data: Words }) => {
       });
     }
     if (text.length === 1) {
-      setTimer(TIME); // Reset the timer to TIME seconds when typing starts
+      setTimer(timeBase); // Reset the timer to TIME seconds when typing starts
     }
-  }, [text, timer, data.words]);
+  }, [text, timer, data.words, timeBase]);
   const ResetStats = () => {
     setStats([]);
     finishedTyping();
   };
+  console.log(stats, "Sdsdsd");
   return (
     <div className="container">
-      <span className="text-main-color text-2xl">{timer}</span>
-      {stats.length === TIME ? (
-        <Result rest={ResetStats} stats={stats} words={data.words} />
+      <div className="flex justify-between">
+        {stats.length === timeBase ? (
+          <button onClick={ResetStats}>Reset</button>
+        ) : (
+          <span className="text-main-color text-2xl">
+            {timer === false ? timeBase : timer}{" "}
+          </span>
+        )}
+
+        {timer === false && (
+          <div className="flex gap-1">
+            {times.map((item) => (
+              <button
+                onClick={() => {
+                  setTimeBase(item);
+                  ResetStats();
+                }}
+                className="text-main-color bg-neutral-700 px-2 rounded-sm"
+                key={item}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+      {stats.length === timeBase ? (
+        <Result stats={stats} words={data.words} />
       ) : (
         <TypeAreainput
           words={data.words}

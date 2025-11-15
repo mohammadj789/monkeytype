@@ -90,9 +90,15 @@ export const TypeAreaChart = ({
         backgroundColor: "#ca4754",
         yAxisID: "yRight",
         pointStyle: "cross",
-        pointRadius: 3, // size of the cross (optional)
-        pointBorderWidth: 2, // thickness (optional)
+        pointBorderWidth: 2,
         pointRotation: 45,
+        // show only if value > 0
+        pointRadius: (context) => {
+          const value = context.raw as number | null;
+          return value && value > 0 ? 3 : 0; // invisible if 0
+        },
+        // tooltip still triggers even if invisible
+        pointHoverRadius: 6,
       },
       {
         label: "wpm",

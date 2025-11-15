@@ -11,11 +11,9 @@ import { TypeAreaChart } from "./ResultChart";
 const Result = ({
   stats,
   words,
-  rest,
 }: {
   stats: StatsModel[];
   words: string[];
-  rest: () => void;
 }) => {
   const results = useMemo(() => {
     const results: Array<Errors & ResultsModel> = [];
@@ -100,7 +98,6 @@ const Result = ({
           <div className="text-3xl  text-main-color ">
             {lastItem.totalRaw}
           </div>
-          s
         </div>
         <div>
           <div className="text-base text-sub-color">time</div>
@@ -128,9 +125,6 @@ const Result = ({
           </div>
         </div>
       </div>
-      <button className="mx-auto col-span-full" onClick={rest}>
-        Reset
-      </button>
     </div>
   );
 };
