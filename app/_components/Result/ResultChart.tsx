@@ -28,6 +28,7 @@ export const TypeAreaChart = ({
 }: {
   results: ResultsModel[];
 }) => {
+  console.log(results);
   const options: ChartOptions<"line"> = {
     responsive: true,
     maintainAspectRatio: false,
@@ -48,11 +49,27 @@ export const TypeAreaChart = ({
           text: "Time (seconds)",
         },
       },
-      y: {
+      yLeft: {
+        type: "linear",
+        position: "left",
         beginAtZero: true,
         title: {
           display: true,
-          text: "Value",
+          text: "Word Per Minutes",
+        },
+      },
+
+      // RIGHT Y axis
+      yRight: {
+        type: "linear",
+        position: "right",
+        beginAtZero: true,
+        grid: {
+          drawOnChartArea: false, // prevents double-grid overlap
+        },
+        title: {
+          display: true,
+          text: "Errors",
         },
       },
     },
@@ -71,22 +88,28 @@ export const TypeAreaChart = ({
         data: results.map((item) => item.errors),
         borderColor: "#ca4754",
         backgroundColor: "#ca4754",
-        tension: 0.4,
+        yAxisID: "yRight",
+        pointStyle: "cross",
+        pointRadius: 3, // size of the cross (optional)
+        pointBorderWidth: 2, // thickness (optional)
+        pointRotation: 45,
       },
       {
         label: "wpm",
         data: results.map((item) => item.totalWpm),
         borderColor: "#e2b714",
-
+        yAxisID: "yLeft",
         backgroundColor: "#e2b714",
         tension: 0.4,
       },
       {
         label: "raw",
-        data: results.map((item) => item.raw),
+        data: results.map((item) => item.totalRaw),
         borderColor: "#646669",
         fill: true,
         backgroundColor: "#2c2e31",
+
+        yAxisID: "yLeft",
         tension: 0.4,
       },
     ],

@@ -3,7 +3,7 @@
 import { Words } from "@/models/englishwords.model";
 import React, { useEffect, useState } from "react";
 
-const TIME = 5;
+const TIME = 15;
 
 import { StatsModel } from "@/models/stats.model";
 import TypeAreainput from "./TypeAreainput";

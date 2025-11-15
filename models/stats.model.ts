@@ -5,10 +5,16 @@ export interface StatsModel {
 }
 export interface ResultsModel {
   totalWpm: number;
-  allErrors: number;
   errors: number;
   typedWord: string;
-  raw: number;
   totalAccuracy: number;
   totalRaw: number;
+}
+export interface Errors {
+  totalErrors: number;
+  missed: number;
+  extra: number;
+  incorrect: number;
+  correct: number;
+  total: number;
 }

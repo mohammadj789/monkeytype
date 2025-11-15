@@ -1,24 +1,37 @@
+import { Errors } from "@/models/stats.model";
+
 export function calculateErrors(
-  original: string,
-  typed: string
-): number {
+  original: string[],
+  typed: string[]
+): Errors {
   let totalErrors = 0;
-
-  for (let i = 0; i < Math.min(original.length, typed.length); i++) {
-    const originalWord = original[i];
+  let missed = 0;
+  let extra = 0;
+  let incorrect = 0;
+  let correct = 0;
+  let total = 0;
+  original.forEach((word, i) => {
     const typedWord = typed[i];
-
-    const minLength = Math.min(originalWord.length, typedWord.length);
-    for (let j = 0; j < minLength; j++) {
-      if (originalWord[j] !== typedWord[j]) totalErrors++;
+    if (typedWord) {
+      for (
+        let j = 0;
+        j < Math.max(typed[i].length, word.length);
+        j++
+      ) {
+        total++;
+        if (typedWord?.[j] !== word?.[j]) totalErrors++;
+        if (!typedWord?.[j] && word?.[j]) missed++;
+        if (typedWord?.[j] && !word?.[j]) extra++;
+        if (
+          typedWord?.[j] &&
+          word?.[j] &&
+          typedWord?.[j] !== word?.[j]
+        )
+          incorrect++;
+        if (typedWord?.[j] === word?.[j]) correct++;
+      }
     }
+  });
 
-    if (typedWord.length < originalWord.length)
-      totalErrors += originalWord.length - typedWord.length;
-
-    if (typedWord.length > originalWord.length)
-      totalErrors += typedWord.length - originalWord.length;
-  }
-
-  return totalErrors;
+  return { totalErrors, extra, missed, incorrect, correct, total };
 }
